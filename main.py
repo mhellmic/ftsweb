@@ -1,6 +1,7 @@
-import web
+import fts
+import os
 import urlparse
-import fts.libftspython
+import web
 
 urls = (
   '/', 'index',
@@ -14,8 +15,6 @@ voms_db = {}
 transfer_db = {}
 jobid_db = {}
 ftsconnect_db = {}
-
-fts = fts.libftspython.Fts("itgt-fts-01.cern.ch:8443")
 
 render = web.template.render('templates/')
 
@@ -41,13 +40,24 @@ class uploadStore:
     return 'Successful upload'
 
 class ftsConnect:
-  def GET(self):
-    pass
+  def GET(self, filename):
+    # write the proxy cert to a file
+    certfilepath = '/tmp/'+filename
+    with open(certfilepath, 'wb') as certfile:
+      certfile.write(voms_db[filename])
+
+    # point the env var X509_USER_PROXY to its place (i.e. /tmp/x509up_u<uid>) 
+    os.environ['X509_USER_PROXY'] = certfilepath
+
+    fts = fts.libftspython.Fts("https://itgt-fts-01.cern.ch:8443")
+    ftsconnect_db['connection'] = fts
 
 class transfer:
   def GET(self):
     query_dict = dict(urlparse.parse_qsl(web.ctx.env['QUERY_STRING'])) 
     if ('source' and 'dest') in query_dict:
+      fts = ftsconnect_db['connection']
+
       src = query_dict['source']
       dst = query_dict['dest']
       file_pair = (src, dst)
