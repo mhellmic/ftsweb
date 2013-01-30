@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>transfer things!</title>
+    <!-- Bootstrap -->
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <h1>Welcome to your copy agent!</h1>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/main.js"></script>
+
+    <div>
+    <p>Please upload to your voms proxy certificate here:</p>
+    <input type="file" id="vomsinput" />
+    </div>
+
+    <div>
+    <h3>Please specify your transfer source and destination:</h3>
+    <form action="transfer">
+    source: <input type="text" name="source" value="source"><br>
+    destination: <input type="text" name="dest" value="destination"><br>
+    <input type="submit" id="transfer" value="transfer">
+    </form>
+    </div>
+
+    <script>
+    jQuery('#vomsinput').on('change', handleFileSelect);
+    </script>
+  </body>
+</html>
