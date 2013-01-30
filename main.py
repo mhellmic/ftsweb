@@ -7,11 +7,13 @@ urls = (
   '/up', 'upload',
   '/upload/(.*)', 'uploadStore',
   '/transfer', 'transfer',
+  '/fts', 'ftsConnect',
 )
 
 voms_db = {}
 transfer_db = {}
 jobid_db = {}
+ftsconnect_db = {}
 
 fts = fts.libftspython.Fts("itgt-fts-01.cern.ch:8443")
 
@@ -37,7 +39,11 @@ class uploadStore:
 #      outfile.write(data)
 
     return 'Successful upload'
-      
+
+class ftsConnect:
+  def GET(self):
+    pass
+
 class transfer:
   def GET(self):
     query_dict = dict(urlparse.parse_qsl(web.ctx.env['QUERY_STRING'])) 
