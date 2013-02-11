@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  </head>
+  <body>
+    <script src="jquery-1.9.0.js"></script>
+    <script src="underscore.js"></script>
+    <script src="backbone.js"></script>
+    <script src="main.js"></script>
+
+    <h1>Web-based data transfer service</h1>
+
+    <p>browse and transfer your data here!</p>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">webfts</a>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="filelist">
+      <button id="addItem">add</button>
+      <button id="refreshList">refresh</button>
+
+      <ul id="list"></ul>
+    </div>
+
+
+    <div>
+      <p>Please upload to your voms proxy certificate here:</p>
+      <input type="file" id="vomsinput" />
+    </div>
+
+    <div>
+      <h3>Please specify your transfer source and destination:</h3>
+      <form action="transfer">
+        source: <input type="text" name="source" value="source"><br>
+        destination: <input type="text" name="dest" value="destination"><br>
+        <input type="submit" id="transfer" value="transfer">
+      </form>
+    </div>
+
+    <script>
+      jQuery('#vomsinput').on('change', handleFileSelect);
+    </script>
+
+    <!-- Templates -->
+    <script type="text/template" id="file-item-template">
+      <%- name %><button class="delete">delete</button>
+    </script>
+  </body>
+</html>
