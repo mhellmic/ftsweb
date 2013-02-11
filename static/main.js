@@ -37,16 +37,17 @@ $(document).ready(function() {
   });
 
   var FileListView = Backbone.View.extend({
-    el: $('#filelist'),
+    //el: $('body'),
 
     events: {
-      'click button#addItem': 'addItem',
+      'click button.load': 'refreshList',
       'click button#refreshList': 'refreshList'
     },
 
-    initialize: function() {
+    initialize: function(buttonEvent) {
       this.collection.on('add', this.appendItem);
       this.collection.on('reset', this.appendAll, this);
+      this.filelist = this.$el.find('ul.fileList');
     },
 
     // this is quite hackish, normally reset() should remove the entries
@@ -56,6 +57,8 @@ $(document).ready(function() {
         var item = this.collection.at(i);
         this.collection.remove(item);
       }
+
+      console.log('list reset');
       this.collection.reset(new File());
     },             
 
@@ -65,7 +68,7 @@ $(document).ready(function() {
 
     appendItem: function(item) {
       var view = new FileView({model: item});
-      $('#list').append(view.render().el);
+      this.filelist.append(view.render().el);
     },
 
     appendAll: function(items) {
@@ -80,8 +83,11 @@ $(document).ready(function() {
 
     list: function() {
       console.log('list');
-      this.fileList = new FileList();
-      this.fileListView = new FileListView({collection: this.fileList});
+      this.fileList1 = new FileList();
+      this.fileList2 = new FileList();
+      this.leftFileListView = new FileListView({el: $('#left'), collection: this.fileList1});
+      
+      this.rightFileListView = new FileListView({el: $('#right'), collection: this.fileList2});
       //this.fileList.fetch();
     }
   });

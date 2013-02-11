@@ -13,15 +13,6 @@
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
   <body>
-    <script src="jquery-1.9.0.js"></script>
-    <script src="underscore.js"></script>
-    <script src="backbone.js"></script>
-    <script src="main.js"></script>
-
-    <h1>Web-based data transfer service</h1>
-
-    <p>browse and transfer your data here!</p>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -31,35 +22,64 @@
       </div>
     </div>
 
-    <div id="filelist">
-      <button id="addItem">add</button>
-      <button id="refreshList">refresh</button>
+    <div class="container">
+      <div class="leaderboard">
+        <h1>Web-based data transfer service</h1>
 
-      <ul id="list"></ul>
+        <p>browse and transfer your data here!</p>
+
+        <div>
+          <p>Please upload to your voms proxy certificate here:</p>
+          <form class="well">
+            <input type="file" class="span2" id="vomsinput" />
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <h3>Please specify your transfer source and destination:</h3>
+      </div>
+
+      <div class="row">
+        <div class="span5" id="left">
+          <form class="well">
+            <input type="text" class="span3" name="source" placeholder="source">
+            <button type="button" id="loadSource" class="btn load">load</button>
+          </form>
+          <ul class="fileList">
+            <li>test</li>
+          </ul>
+        </div>
+        <div class="span2">
+          <form class="well">
+            <button type="button" id="transfer" class="btn">transfer</button>
+          </form>
+        </div>
+        <div class="span5" id="right">
+          <form class="well">
+            <input type="text" class="span3" name="dest" placeholder="destination">
+            <button type="button" class="btn load">load</button>
+          </form>
+          <ul class="fileList"></ul>
+        </div>
+      </div>
+
     </div>
-
-
-    <div>
-      <p>Please upload to your voms proxy certificate here:</p>
-      <input type="file" id="vomsinput" />
-    </div>
-
-    <div>
-      <h3>Please specify your transfer source and destination:</h3>
-      <form action="transfer">
-        source: <input type="text" name="source" value="source"><br>
-        destination: <input type="text" name="dest" value="destination"><br>
-        <input type="submit" id="transfer" value="transfer">
-      </form>
-    </div>
-
-    <script>
-      jQuery('#vomsinput').on('change', handleFileSelect);
-    </script>
 
     <!-- Templates -->
     <script type="text/template" id="file-item-template">
       <%- name %><button class="delete">delete</button>
     </script>
+
+    <!-- Scripts -->
+    <script src="jquery-1.9.0.js"></script>
+    <script src="underscore.js"></script>
+    <script src="backbone.js"></script>
+    <script src="main.js"></script>
+
+    <script>
+      jQuery('#vomsinput').on('change', handleFileSelect);
+    </script>
+
   </body>
 </html>
