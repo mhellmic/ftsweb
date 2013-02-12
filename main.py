@@ -1,4 +1,5 @@
 import fts
+import gfal2
 import os
 import urlparse
 import web
@@ -9,6 +10,7 @@ urls = (
   '/upload/(.*)', 'uploadStore',
   '/transfer', 'transfer',
   '/fts', 'ftsConnect',
+  '/storage', 'storageHandler',
 )
 
 voms_db = {}
@@ -17,6 +19,7 @@ jobid_db = {}
 ftsconnect_db = {}
 
 render = web.template.render('templates/')
+gfal = gfal2.creat_context()
 
 class index:
   def GET(self):
@@ -25,6 +28,19 @@ class index:
 class upload:
   def GET(self):
     return render.upload()
+
+class storageHandler:
+  def GET(self):
+    query_dict = dict(urlparse.parse_qsl(web.ctx.env['QUERY_STRING'])) 
+    storageLocation = query_dict.get('location', None)
+
+    if not isValidStorageURL(storageLocation):
+      return None
+
+    locationContents = gfal.listdir(storageLocation)
+
+    web.header('Content-Type', 'application/json')
+    return json.dumps(locationContents)
 
 class uploadStore:
   def GET(self, filename):

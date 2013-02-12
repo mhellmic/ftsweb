@@ -48,6 +48,7 @@ $(document).ready(function() {
       this.collection.on('add', this.appendItem);
       this.collection.on('reset', this.appendAll, this);
       this.filelist = this.$el.find('ul.fileList');
+      this.storageLocation = this.$el.find('input.location');
     },
 
     // this is quite hackish, normally reset() should remove the entries
@@ -58,8 +59,11 @@ $(document).ready(function() {
         this.collection.remove(item);
       }
 
+      // get new entries
+      var newFileList = fetchFileList(this.storageLocation.val())
+
       console.log('list reset');
-      this.collection.reset(new File());
+      this.collection.reset(newFileList);
     },             
 
     addItem: function() {
@@ -73,6 +77,13 @@ $(document).ready(function() {
 
     appendAll: function(items) {
       items.each(this.appendItem, this);
+    },
+
+    fetchFileList: function(storageLocation) {
+      var url = 'storage?location='+storageLocation;
+      $.get('GET', url, function(responseText) {
+        alert(responseText);
+      });
     }
   });
 
