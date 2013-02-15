@@ -60,7 +60,7 @@ $(document).ready(function() {
       }
 
       // get new entries
-      var newFileList = fetchFileList(this.storageLocation.val())
+      var newFileList = this.fetchFileList(this.storageLocation.val())
 
       console.log('list reset');
       this.collection.reset(newFileList);
@@ -80,8 +80,8 @@ $(document).ready(function() {
     },
 
     fetchFileList: function(storageLocation) {
-      var url = 'storage?location='+storageLocation;
-      $.get('GET', url, function(responseText) {
+      var url = '/storage?location='+storageLocation;
+      $.get(url, function(responseText) {
         alert(responseText);
       });
     }
