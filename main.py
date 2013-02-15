@@ -4,6 +4,8 @@ import os
 import urlparse
 import web
 
+from common import isValidStorageURL
+
 urls = (
   '/', 'index',
   '/up', 'upload',
@@ -32,10 +34,10 @@ class upload:
 class storageHandler:
   def GET(self):
     query_dict = dict(urlparse.parse_qsl(web.ctx.env['QUERY_STRING'])) 
-    storageLocation = query_dict.get('location', None)
+    storageLocation = query_dict.get('location', '')
 
-    if not isValidStorageURL(storageLocation):
-      return None
+    if not isValidStorageURL(storageLocation.encode('ascii', 'ignore')):
+      raise web.seeother('/')
 
     locationContents = gfal.listdir(storageLocation)
 
