@@ -1,5 +1,6 @@
 import fts
 import gfal2
+import json
 import os
 import urlparse
 import web
