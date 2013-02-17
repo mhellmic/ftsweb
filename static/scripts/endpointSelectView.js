@@ -6,16 +6,16 @@ var EndpointSelectView = Backbone.View.extend({
   },
 
   initialize: function(attrs) {
+    this.endpoint = this.options.endpoint;
   },
 
   render: function() {
-    console.log('selectview el: '+this.el);
     $(this.el).html(this.template(this.model.toJSON()));
   },
 
   changeEndpointLocation: function(evt) {
-    alert('pressing the button');
-    this.options.endpoint.set({location: 'test'});
+    console.log('pressing the button');
+    this.endpoint.set({location: $(this.el).find('input.location').val()});
   }
 });
 
