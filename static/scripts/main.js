@@ -12,7 +12,7 @@ requirejs.config({
       exports: '_'
     },
     'lib/backbone': {
-      deps: ['lib/underscore'],
+      deps: ['lib/underscore', 'lib/jquery'],
       exports: 'Backbone'
     },
     'app': {

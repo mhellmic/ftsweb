@@ -15,7 +15,12 @@
       }
     </style>
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <script data-main="scripts/main.js" src="scripts/require.js"></script>
+    <script type="text/javascript">
+      var require = {
+        urlArgs: "bust="+new Date().getTime()
+      };
+    </script>
+    <script data-main="scripts/main" src="scripts/require.js"></script>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
