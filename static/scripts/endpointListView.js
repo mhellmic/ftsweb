@@ -7,7 +7,9 @@ define([
 ], function($, _, Backbone, EndpointFile, EndpointFileView) {
   var EndpointListView = Backbone.View.extend({
     tagName: 'ul',
-//    template: _.template($('#template-endpoint-list').html()),
+
+    event: {
+    },
 
     initialize: function(attrs) {
       this.endpoint = this.options.endpoint;
@@ -25,7 +27,7 @@ define([
 
     render: function() {
       _.each(this.collection.models, function(f) {
-        $(this.el).append(new EndpointFileView({model:f}).render().el);
+        $(this.el).append(new EndpointFileView({model: f, endpoint: this.endpoint}).render().el);
       }, this);
       return this;
     },

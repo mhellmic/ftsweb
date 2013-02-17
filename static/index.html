@@ -88,13 +88,14 @@
 
     <script type="text/template" id="template-endpoint-select">
       <form class="well">
-        <input type="text" class="span3 location" name="<%= name %>" placeholder="<%= placeholder %>">
+        <input type="text" class="span3 location" name="<%= name %>" placeholder="<%= placeholder %>" />
         <button type="button" class="btn load">load</button>
       </form>
     </script>
 
     <script type="text/template" id="template-file-list-item">
-      <li><%= name %><button class="delete">delete</button></li>
+      <li><a class="filelink" href="<%= name %>" onclick="return false;"><%= name %></a></li>
+      <!--<li><%= name %><button class="delete">delete</button></li>-->
     </script>
 
     <!-- Scripts -->
