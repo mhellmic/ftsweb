@@ -9,6 +9,13 @@ define([
     },
 
     initialize: function() {
+    },
+
+    moveInPath: function(dir) {
+      console.log('endpoint: new dir: '+dir);
+      console.log('endpoint location: '+this.get('location'));
+      var newLoc = this.get('location')+'/'+dir;
+      this.set({'location': newLoc});
     }
   });
 

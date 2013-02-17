@@ -12,15 +12,21 @@ define([
 
     initialize: function(attrs) {
       this.endpoint = this.options.endpoint;
+      this.listenTo(this.options.endpoint, 'change', this.updateInput);
     },
 
     render: function() {
       $(this.el).html(this.template(this.model.toJSON()));
     },
 
+    updateInput: function() {
+      $(this.el).find('input.location').val(this.endpoint.get('location'));
+    },
+
     changeEndpointLocation: function(evt) {
       console.log('pressing the button');
       this.endpoint.set({location: $(this.el).find('input.location').val()});
+      console.log(this.endpoint.get('location'));
     }
   });
 
