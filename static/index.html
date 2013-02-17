@@ -94,7 +94,9 @@
     </script>
 
     <script type="text/template" id="template-file-list-item">
-      <li><a class="filelink" href="<%= name %>" onclick="return false;"><%= name %></a></li>
+      <li>
+      <a class="filelink" style=" <% if (isMarked) { %>background-color:#0088cc;<% } %>" href="<%= name %>" onclick="return false;"><%= name %></a>
+      </li>
       <!--<li><%= name %><button class="delete">delete</button></li>-->
     </script>
 
