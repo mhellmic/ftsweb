@@ -8,12 +8,9 @@ define([
   var EndpointListView = Backbone.View.extend({
     tagName: 'ul',
 
-    event: {
-    },
-
     initialize: function(attrs) {
       this.endpoint = this.options.endpoint;
-      this.listenTo(this.options.endpoint, 'change', this.refreshList);
+      this.listenTo(this.options.endpoint, 'change:location', this.refreshList);
 
       this.collection.on('reset', this.render, this);
     },
