@@ -3,7 +3,7 @@ var EndpointListView = Backbone.View.extend({
   template: _.template($('#template-endpoint-list').html()),
 
   initialize: function(attrs) {
-    this.options = attrs;
+    this.endpoint = this.options.endpoint;
     this.listenTo(this.options.endpoint, 'change', this.refreshList);
   },
 
@@ -13,7 +13,9 @@ var EndpointListView = Backbone.View.extend({
   },
 
   refreshList: function() {
-    alert('it changed!!');
+    var newLocation = this.endpoint.get('location');
+    console.log('it changed to '+newLocation);
+    this.collection.fetch({data: {location: newLocation}});
   }
 });
 
