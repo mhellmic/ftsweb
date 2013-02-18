@@ -4,10 +4,6 @@
     <meta charset="utf-8">
     <title>title</title>
 
-    <!--
-    <link href="jqueryFileTree/jqueryFileTree.css" rel="stylesheet">
-    -->
-
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <style>
       body {
@@ -51,14 +47,7 @@
       </div>
 
       <div class="row">
-        <div class="span5" id="left">
-          <form class="well">
-            <input type="text" class="span3 location" name="source" placeholder="source">
-            <button type="button" id="loadSource" class="btn load">load</button>
-          </form>
-          <ul class="fileList">
-            <li>test</li>
-          </ul>
+        <div class="span5" id="left-selector">
         </div>
         <div class="span2">
           <form class="well">
@@ -71,7 +60,7 @@
 
       <div class="row">
         <div class="span5" id="left-list">
-          <ul class="filelist"></ul>
+          <table class="table table-hover table-bordered filelist"></table>
         </div>
         <div class="span2">
         </div>
