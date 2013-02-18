@@ -18,26 +18,47 @@ define([
     min: function() {
       console.log('min');
       this.endpoint1 = new Endpoint();
-      console.log('from router: filelist '+typeof(EndpointFileList));
+      this.endpoint2 = new Endpoint();
       this.fileList1 = new EndpointFileList();
+      this.fileList2 = new EndpointFileList();
+
+      // the left list
       this.endpoint1listview = new EndpointListView({
-        el: $('#right-list table.filelist'),
+        el: $('#left-list table.filelist'),
         endpoint: this.endpoint1,
         collection: this.fileList1,
       });
       this.endpoint1listview.render();
 
-      this.endpointselect = new EndpointSelect({
-        location: 'dest',
-        placeholder: 'destination',
+      this.endpoint1select = new EndpointSelect({
+        name: 'src',
+        placeholder: 'source',
       });
-      console.log('from router: select '+typeof(EndpointSelectView));
-      this.endpointselectview = new EndpointSelectView({
-        el: $('#right-selector'),
-        model: this.endpointselect,
+      this.endpoint1selectview = new EndpointSelectView({
+        el: $('#left-selector'),
+        model: this.endpoint1select,
         endpoint: this.endpoint1,
       });
-      this.endpointselectview.render();
+      this.endpoint1selectview.render();
+
+      // the right list
+      this.endpoint2listview = new EndpointListView({
+        el: $('#right-list table.filelist'),
+        endpoint: this.endpoint2,
+        collection: this.fileList2,
+      });
+      this.endpoint2listview.render();
+
+      this.endpoint2select = new EndpointSelect({
+        name: 'dest',
+        placeholder: 'destination',
+      });
+      this.endpoint2selectview = new EndpointSelectView({
+        el: $('#right-selector'),
+        model: this.endpoint2select,
+        endpoint: this.endpoint2,
+      });
+      this.endpoint2selectview.render();
     }
   });
 
