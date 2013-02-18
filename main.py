@@ -40,10 +40,13 @@ class storageHandler:
     if not isValidStorageURL(storageLocation.encode('ascii', 'ignore')):
       raise web.seeother('/')
 
+    os.environ['X509_USER_PROXY'] = '/tmp/x509up_u8365'
+    print 'storageLocation', storageLocation
     locationContents = gfal.listdir(storageLocation)
 
     web.header('Content-Type', 'application/json')
-    return json.dumps(locationContents)
+    jsonLocContents = json.dumps(map(lambda s: {'name':s}, locationContents))
+    return jsonLocContents
 
 class uploadStore:
   def GET(self, filename):
