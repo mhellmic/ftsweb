@@ -20,13 +20,13 @@ define([
     },
 
     updateInput: function() {
-      $(this.el).find('input.location').val(this.endpoint.get('location'));
+      $(this.el).find('input.location').val(this.endpoint.getUrl());
     },
 
     changeEndpointLocation: function(evt) {
       console.log('pressing the button');
-      this.endpoint.set({location: $(this.el).find('input.location').val()});
-      console.log(this.endpoint.get('location'));
+      this.endpoint.setLocation($(this.el).find('input.location').val());
+      console.log(this.endpoint.getLocationString());
     }
   });
 

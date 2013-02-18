@@ -6,16 +6,16 @@ define([
   'endpointFileView'
 ], function($, _, Backbone, EndpointFile, EndpointFileView) {
   var EndpointListView = Backbone.View.extend({
-    tagName: 'ul',
+    tagName: 'table',
 
     initialize: function(attrs) {
       this.endpoint = this.options.endpoint;
-      this.listenTo(this.options.endpoint, 'change:location', this.refreshList);
+      this.listenTo(this.options.endpoint, 'change:location', this.refreshList, this);
 
       this.collection.on('reset', this.render, this);
     },
 
-    removeAllFromView: function() {
+    removeAll: function() {
       for (var i = this.collection.length -1; i >= 0; --i) {
         var item = this.collection.at(i);
         this.collection.remove(item);
@@ -30,10 +30,16 @@ define([
     },
 
     refreshList: function() {
-      var newLocation = this.endpoint.get('location');
+      var newLocation = this.endpoint.getUrl();
       console.log('it changed to '+newLocation);
-      this.removeAllFromView();
+      this.removeAll();
       this.collection.fetch({data: {location: newLocation}});
+      // doesnt work because it will not be rendered
+      // leave it for later, maybe we have to modify the
+      // fetch method to do it before 'reset' is called
+      //if (!this.endpoint.isRoot()) {
+      //  this.collection.add(new EndpointFile({'name':'..'}));
+      //}
     }
   });
 

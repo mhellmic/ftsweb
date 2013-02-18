@@ -76,16 +76,13 @@
         <div class="span2">
         </div>
         <div class="span5" id="right-list">
-          <ul class="filelist"></ul>
+          <table class="table table-hover table-bordered filelist"></table>
         </div>
       </div>
 
     </div>
 
     <!-- Templates -->
-    <script type="text/template" id="template-endpoint-list">
-    </script>
-
     <script type="text/template" id="template-endpoint-select">
       <form class="well">
         <input type="text" class="span3 location" name="<%= name %>" placeholder="<%= placeholder %>" />
@@ -94,12 +91,15 @@
     </script>
 
     <script type="text/template" id="template-file-list-item">
-      <li>
-      <a class="filelink" style=" <% if (isMarked) { %>background-color:#0088cc;<% } %>" href="<%= name %>" onclick="return false;"><%= name %></a>
-      </li>
-      <!--<li><%= name %><button class="delete">delete</button></li>-->
+      <tr class="<% if (isMarked) { %>info<% } %>">
+        <td>
+          <a class="filelink" href="<%= remote_url %>" onclick="return false;"><%= name %></a>
+        </td>
+      </tr>
     </script>
 
+      <!--<li><a class="filelink <% if (isMarked) { .info }; %>" href="<%= remote_url %>" onclick="return false;"><%= name %></a></li>-->
+      <!--<li><%= name %><button class="delete">delete</button></li>-->
     <!-- Scripts -->
     <!--
     <script src="jquery-1.9.0.js"></script>
