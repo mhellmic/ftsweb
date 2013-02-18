@@ -8,6 +8,10 @@ define([
     model: EndpointFile,
     url: function() {
       return '/storage';
+    },
+
+    comparator: function(fileEntry) {
+      return fileEntry.get('name');
     }
   });
 

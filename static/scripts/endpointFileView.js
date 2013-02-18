@@ -4,7 +4,7 @@ define([
   'lib/backbone'
 ], function($, _, Backbone) {
   var EndpointFileView = Backbone.View.extend({
-    tagName: 'li',
+    tagName: 'tr',
 
     events: {
       'click a.filelink': 'moveInPath',
@@ -15,6 +15,8 @@ define([
 
     initialize: function() {
       this.endpoint = this.options.endpoint;
+      console.log('endpoint file view url: '+this.endpoint.getUrl());
+      this.model.set({'remote_url': this.endpoint.getFileUrl(this.model.get('name'))});
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'destroy', this.remove);
       this.listenTo(this.model, 'remove', this.remove);
@@ -34,8 +36,8 @@ define([
         console.log('endpoint file view: shift-click');
         this.model.toggleMark();
       } else {
-        console.log('move in the directory path');
-        this.endpoint.moveInPath(evt.target.name);
+        console.log('move in the directory path to: '+evt.target.href);
+        this.endpoint.setLocation(evt.target.href);
       }
     }
   });

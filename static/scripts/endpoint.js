@@ -5,17 +5,42 @@ define([
 ], function($, _, Backbone) {
   var Endpoint = Backbone.Model.extend({
     defaults: {
-      'location': '',
+      'protocol': '',
+      'host': '',
+      'location': '', // 'changes' on first access to []
     },
 
     initialize: function() {
     },
 
-    moveInPath: function(dir) {
-      console.log('endpoint: new dir: '+dir);
-      console.log('endpoint location: '+this.get('location'));
-      var newLoc = this.get('location')+'/'+dir;
-      this.set({'location': newLoc});
+    updatePath: function(url) {
+      this.setLocation(url);
+      console.log('endpoint newUrl: '+this.getUrl());
+    },
+
+    setLocation: function(locString) {
+      this.set({'location': locString});
+      console.log('endpoint setlocation: '+this.get('location'));
+    },
+
+    getUrl: function() {
+      return this.get('location');
+    },
+
+    getFileUrl: function(filename) {
+      return this.get('location')+'/'+filename;
+    },
+
+    getLocationString: function() {
+      return this.get('location');
+    },
+
+    isRoot: function() {
+      if (this.get('location').length == 0) {
+        return true;
+      } else {
+        return false;
+      }
     }
   });
 

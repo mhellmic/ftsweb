@@ -21,7 +21,7 @@ define([
       console.log('from router: filelist '+typeof(EndpointFileList));
       this.fileList1 = new EndpointFileList();
       this.endpoint1listview = new EndpointListView({
-        el: $('#right-list'),
+        el: $('#right-list table.filelist'),
         endpoint: this.endpoint1,
         collection: this.fileList1,
       });
