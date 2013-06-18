@@ -49,10 +49,7 @@
       <div class="row">
         <div class="span5" id="left-selector">
         </div>
-        <div class="span2">
-          <form class="well">
-            <button type="button" id="transfer" class="btn">transfer</button>
-          </form>
+        <div class="span2" id="transfer">
         </div>
         <div class="span5" id="right-selector">
         </div>
@@ -85,6 +82,13 @@
           <a class="filelink" href="<%= remote_url %>" onclick="return false;"><%= name %></a>
         </td>
       </tr>
+    </script>
+
+    <script type="text/template" id="template-transfer-buttons">
+      <form class="well">
+        <button type="button" id="transfer-from-left" class="btn">transfer from left</button>
+        <button type="button" id="transfer-from-right" class="btn">transfer from right</button>
+      </form>
     </script>
 
       <!--<li><a class="filelink <% if (isMarked) { .info }; %>" href="<%= remote_url %>" onclick="return false;"><%= name %></a></li>-->
