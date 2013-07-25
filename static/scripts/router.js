@@ -8,8 +8,10 @@ define([
   'endpointFileList',
   'endpointListView',
   'endpointSelect',
-  'endpointSelectView'
-], function($, _, Backbone, Endpoint, EndpointFile, EndpointFileList, EndpointListView, EndpointSelect, EndpointSelectView) {
+  'endpointSelectView',
+  'transfer',
+  'transferView'
+], function($, _, Backbone, Endpoint, EndpointFile, EndpointFileList, EndpointListView, EndpointSelect, EndpointSelectView, Transfer, TransferView) {
   var AppRouter = Backbone.Router.extend({
     routes: {
       "": "min"
@@ -17,16 +19,20 @@ define([
 
     min: function() {
       console.log('min');
-      this.endpoint1 = new Endpoint();
-      this.endpoint2 = new Endpoint();
-      this.fileList1 = new EndpointFileList();
-      this.fileList2 = new EndpointFileList();
+      this.filelist1 = new EndpointFileList();
+      this.filelist2 = new EndpointFileList();
+      this.endpoint1 = new Endpoint({
+        filelist: this.filelist1
+      });
+      this.endpoint2 = new Endpoint({
+        filelist: this.filelist2
+      });
 
       // the left list
       this.endpoint1listview = new EndpointListView({
         el: $('#left-list table.filelist'),
         endpoint: this.endpoint1,
-        collection: this.fileList1,
+        collection: this.filelist1,
       });
       this.endpoint1listview.render();
 
@@ -45,7 +51,7 @@ define([
       this.endpoint2listview = new EndpointListView({
         el: $('#right-list table.filelist'),
         endpoint: this.endpoint2,
-        collection: this.fileList2,
+        collection: this.filelist2,
       });
       this.endpoint2listview.render();
 
@@ -59,6 +65,15 @@ define([
         endpoint: this.endpoint2,
       });
       this.endpoint2selectview.render();
+      
+      // the transfer
+      this.transferview = new TransferView({
+        el: $('#transfer'),
+        endpoint1: this.endpoint1,
+        endpoint2: this.endpoint2,
+      });
+      this.transferview.render();
+
     }
   });
 
