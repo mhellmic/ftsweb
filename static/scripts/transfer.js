@@ -52,12 +52,29 @@ define([
         }
       };
 
+      // Attention: this is an example request,
+      // not the one we need here :)
       // send request
-      $.post("https://fts3-pilot.cern.ch:8446/jobs",
-      data, function(data, status, xhr) {
-      console.log(data);
-      console.log(status)
-      }, "application/json");
+      $.ajax({
+        type: "GET",
+        url: "https://fts3-pilot.cern.ch:8446/jobs",
+        //data: data,
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("fts connect failed");
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+          },
+        success: function(data, textStatus, xhr) {
+          console.log(data);
+          console.log(textStatus)
+          },
+        //dataType: "application/json",
+        xhrFields: {
+          withCredentials: true
+          },
+        crossDomain: true,
+        });
     }
   });
 
